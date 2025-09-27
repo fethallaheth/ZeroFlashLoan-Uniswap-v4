@@ -8,7 +8,6 @@ import {IPoolManager} from "v4-core/interfaces/IPoolManager.sol";
 import {Currency} from "v4-core/types/Currency.sol";
 import {CurrencyLibrary} from "v4-core/types/Currency.sol";
 
-
 /// @title ZeroFlashLoan
 /// @author ChoasSR
 contract ZeroFlashLoan is IUnlockCallback {
@@ -53,9 +52,9 @@ contract ZeroFlashLoan is IUnlockCallback {
     function unlockCallback(bytes calldata data) external onlyPoolManager returns (bytes memory) {
         (address borrower, Currency currency, uint256 amount) = abi.decode(data, (address, Currency, uint256));
 
-        uint256 funds = currency.isAddressZero() 
-                        ? address(poolManager).balance 
-                        : IERC20(Currency.unwrap(currency)).balanceOf(address(poolManager));
+        uint256 funds = currency.isAddressZero()
+            ? address(poolManager).balance
+            : IERC20(Currency.unwrap(currency)).balanceOf(address(poolManager));
 
         if (amount > funds) revert InsufficientFunds();
 
@@ -72,5 +71,6 @@ contract ZeroFlashLoan is IUnlockCallback {
 
         return "";
     }
+
     receive() external payable {}
 }

@@ -9,7 +9,6 @@ import {IERC20} from "@openzeppelin/contracts/token/ERC20/IERC20.sol";
 import {Currency} from "v4-core/types/Currency.sol";
 
 contract ZeroFlashLoanTest is Test {
-
     address constant POOL_MANAGER = 0x498581fF718922c3f8e6A244956aF099B2652b2b;
 
     ZeroFlashLoan zeroFlashLoan;
